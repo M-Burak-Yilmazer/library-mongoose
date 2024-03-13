@@ -33,9 +33,17 @@ const book = {
     const data = await Book.updateOne({ _id: req.params.id }, req.body, {
       runValidators: true,
     });
-    res.status().send({});
+    const updated = await Book.findOne({ _id: req.params.id });
+    res.status(202).send({ isError: false, body: updated, data });
   },
   delete: async (req, res) => {
-    res.status().send({});
+    const idIsValid = mongoose.Types.ObjectId.isValid(req.params.id);
+    if (!idIsValid) throw new CustomError("id is not valid Id", 400);
+    const data = await Book.deleteOne({ _id: req.params.id });
+    if (!data.deletedCount) throw new CustomError("not deleted", 409);
+    res.status(204).send({
+      isError: false,
+      body: data,
+    });
   },
 };
