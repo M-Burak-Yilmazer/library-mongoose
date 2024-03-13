@@ -40,6 +40,13 @@ const librarySchema = new mongoose.Schema(
     timestamp: true,
   }
 );
+librarySchema.set("toJSON", {
+  transform: (doc, ret) => {
+    ret.id = ret._id;
+    delete ret._id;
+    delete ret.__v;
+  },
+});
 
 const Book = mongoose.model("Book", librarySchema);
 module.exports = { Book };
