@@ -8,6 +8,8 @@ This project is created to develop an application where users can create their o
 - Book management: Users can add, edit, and delete books.
 - Search and filtering: Users can search for books, filter by categories, and view books in their lists.
 
+- ![](https://github.com/M-Burak-Yilmazer/library_frontend/blob/master/library-ezgif.com-optimize.gif)
+
 ## Technologies Used
 
 ### Backend
