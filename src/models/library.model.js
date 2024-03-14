@@ -1,9 +1,25 @@
 "use strict";
 
 const mongoose = require("mongoose");
+const bookCategorySchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      trim: true,
+      required: true,
+    },
+  },
+  { collection: "bookCategory", timestamps: true }
+);
 
 const librarySchema = new mongoose.Schema(
   {
+    bookCategoryId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "BookCategory",
+      required: true,
+    },
+
     title: {
       type: String,
       required: true,
@@ -49,4 +65,5 @@ librarySchema.set("toJSON", {
 });
 
 const Book = mongoose.model("Book", librarySchema);
-module.exports = { Book };
+const BookCategory = mongoose.model("BookCategory", bookCategorySchema);
+module.exports = { Book, BookCategory };
