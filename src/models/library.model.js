@@ -7,6 +7,7 @@ const bookCategorySchema = new mongoose.Schema(
       type: String,
       trim: true,
       required: true,
+      
     },
   },
   { collection: "bookCategory", timestamps: true }
@@ -25,6 +26,7 @@ const librarySchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
+   
     author: {
       type: String,
       required: true,

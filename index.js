@@ -21,3 +21,6 @@ app.use(require("./src/errors/errorHandler.js"));
 app.listen(PORT, () =>
   console.log(`your database is live on : http://127.0.0.1:${PORT}`)
 );
+
+
+require("./src/sync.js")()
