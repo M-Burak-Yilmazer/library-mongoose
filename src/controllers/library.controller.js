@@ -61,12 +61,12 @@ const book = {
     //   .sort(sort)
     //   .skip(skip)
     //   .limit(limit);
-    const data = await res.getModelList(Book,"bookCategoryId");
+    const data = await res.getModelList(Book, "bookCategoryId");
 
     res.status(200).send({
       isError: false,
-      body: data,
       details: await res.getModelListDetails(Book),
+      body: data,
     });
   },
   create: async (req, res) => {
@@ -80,7 +80,9 @@ const book = {
     // const idIsValid = mongoose.Types.ObjectId.isValid(req.params.id);
     // if (!idIsValid) throw new CustomError("id is not valid Id", 400);
 
-    const data = await Book.findOne({ _id: req.params.id });
+    const data = await Book.findOne({ _id: req.params.id }).populate(
+      "bookCategoryId"
+    );
     res.status(200).send({ isError: false, body: data });
   },
   update: async (req, res) => {
