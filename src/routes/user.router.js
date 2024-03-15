@@ -13,5 +13,5 @@ router
 
 module.exports = router;
 
-router.post("/login",User.login)
-router.get("logout", User.logout)
+router.post("/login", User.login);
+router.get("/logout", User.logout);
