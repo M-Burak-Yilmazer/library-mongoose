@@ -2,7 +2,8 @@
 
 const { CustomError } = require("../errors/customError");
 const { Book, BookCategory } = require("../models/library.model");
-const mongoose = require("mongoose");
+
+require("express-async-errors");
 
 const bookCategory = {
   list: async (req, res) => {
@@ -55,34 +56,17 @@ const bookCategory = {
 const book = {
   list: async (req, res) => {
     /* FILTERING & SEARCHING & SORTING & PAGINATION */
-    //! Filter
-    const filter = req.query?.filter || {};
-    // console.log(filter);
 
-    //? Searching
-    const search = req.query?.search || {};
-    console.log(search);
-    for (let key in search) {
-      search[key] = {
-        $regex: search[key],
-        $options: "i",
-      }; //! i : büyük kğçük harf duyarsız
-      
-    }
-    // console.log(search)
-
-    ///?*Sorting
-
-    const sort = req.query?.sort || {};
-    console.log(sort);
-
-    /* FILTERING & SEARCHING & SORTING & PAGINATION */
-
-    const data = await Book.find({ ...filter, ...search }).sort(sort);
+    // const data = await Book.find({ ...filter, ...search })
+    //   .sort(sort)
+    //   .skip(skip)
+    //   .limit(limit);
+    const data = await res.getModelList(Book,"bookCategoryId");
 
     res.status(200).send({
       isError: false,
       body: data,
+      details: await res.getModelListDetails(Book),
     });
   },
   create: async (req, res) => {

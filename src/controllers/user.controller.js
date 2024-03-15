@@ -10,7 +10,7 @@ const User = require("../models/user.model");
 
 module.exports = {
   list: async (req, res) => {
-    const data = await User.find();
+    const data = await getModelList(User)
     res.status(200).send({
       error: false,
       data: data,

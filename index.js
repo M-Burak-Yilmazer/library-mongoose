@@ -22,7 +22,9 @@ app.use(
     //  maxAge:1000*60*60*24*3
   })
 );
-require("./src/middlewares/user.check.js");
+// app.use(require("./src/middlewares/user.check.js"));
+
+app.use(require("./src/middlewares/findSearchSortPage"));
 
 app.all("/", (req, res) => {
   if (req.isLogin) {
