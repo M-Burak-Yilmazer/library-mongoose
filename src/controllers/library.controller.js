@@ -54,6 +54,13 @@ const bookCategory = {
 
 const book = {
   list: async (req, res) => {
+    /* FILTERING & SEARCHING & SORTING & PAGINATION */
+
+
+    
+
+    /* FILTERING & SEARCHING & SORTING & PAGINATION */
+
     const data = await Book.find({});
     res.status(200).send({
       isError: false,

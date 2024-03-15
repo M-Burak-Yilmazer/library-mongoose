@@ -13,10 +13,10 @@ bookRouter
   .patch(bookCategory.update)
   .delete(bookCategory.delete);
 
-bookRouter.route("/").get(book.list).post(book.create);
+bookRouter.route("/book").get(book.list).post(book.create);
 
 bookRouter
-  .route("/:id")
+  .route("/book/:id")
   .all(idValidation)
   .get(book.read)
   .put(book.update)

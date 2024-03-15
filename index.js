@@ -15,12 +15,38 @@ app.use(
 const PORT = process.env.PORT || 8080;
 require("./src/starter/dbConnection");
 
-// app.all("/", (req, res) => res.send("<h1>Welcome to INDEX PAGE</h1>"));
+const session = require("cookie-session");
+app.use(
+  session({
+    secret: process.env.SECRET_KEY,
+    //  maxAge:1000*60*60*24*3
+  })
+);
+require("./src/middlewares/user.check.js");
+
+app.all("/", (req, res) => {
+  if (req.isLogin) {
+    res.send({
+      error: false,
+      message: "login ok",
+      session: req.session,
+      user: req.user,
+      //* anasayfada da burda görünüyor mu görebilirim
+    });
+  } else {
+    res.send({
+      error: false,
+      message: "login ok",
+      session: req.session,
+    });
+  }
+});
+
+app.use(require("./src/routes/user.router.js"));
 app.use(require("./src/routes/library.route.js"));
 app.use(require("./src/errors/errorHandler.js"));
 app.listen(PORT, () =>
   console.log(`your database is live on : http://127.0.0.1:${PORT}`)
 );
 
-
-require("./src/sync.js")()
+// require("./src/sync.js")();
