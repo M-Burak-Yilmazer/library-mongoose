@@ -50,13 +50,15 @@ module.exports = async () => {
       userId: user._id,
       bookCategoryId: bookCategory._id,
       title: `test ${key} title`,
-      author: `test ${key} content`,
+      author: `test ${key} author`,
       publicationYear: 2012,
       ISBN: `${key}`,
-      genre: `test ${key} content`,
-      image: `test ${key} content`,
+      genre: `test ${key} genre`,
+      image: `https://picsum.photos/id/${key}/200/300`,
+      published: Boolean(key % 2),
     });
   }
+  
 
   // End:
   console.log("* Synchronized *");

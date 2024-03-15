@@ -52,6 +52,10 @@ const librarySchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
+    published:{
+      type:Boolean,
+      default:true
+    }
   },
   {
     collection: "book",

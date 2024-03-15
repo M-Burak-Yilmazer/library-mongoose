@@ -55,13 +55,31 @@ const bookCategory = {
 const book = {
   list: async (req, res) => {
     /* FILTERING & SEARCHING & SORTING & PAGINATION */
+    //! Filter
+    const filter = req.query?.filter || {};
+    // console.log(filter);
 
+    //? Searching
+    const search = req.query?.search || {};
+    console.log(search);
+    for (let key in search) {
+      search[key] = {
+        $regex: search[key],
+        $options: "i",
+      }; //! i : büyük kğçük harf duyarsız
+      
+    }
+    // console.log(search)
 
-    
+    ///?*Sorting
+
+    const sort = req.query?.sort || {};
+    console.log(sort);
 
     /* FILTERING & SEARCHING & SORTING & PAGINATION */
 
-    const data = await Book.find({});
+    const data = await Book.find({ ...filter, ...search }).sort(sort);
+
     res.status(200).send({
       isError: false,
       body: data,
